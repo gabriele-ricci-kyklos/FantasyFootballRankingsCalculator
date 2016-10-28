@@ -1,4 +1,5 @@
-﻿using GenericCore.Support;
+﻿using FFRC.Core.BLL.Web;
+using GenericCore.Support;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,14 @@ namespace FFRC.Console
 {
     public partial class MainForm : Form
     {
+        private IWebBLL WebBLL;
+
         public MainForm()
         {
             InitializeComponent();
+
+            WebBLL = new WebBLL();
+
             BindWeeks();
         }
 

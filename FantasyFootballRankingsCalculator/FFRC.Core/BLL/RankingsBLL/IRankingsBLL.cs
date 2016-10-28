@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FFRC.Core
+namespace FFRC.Core.BLL
 {
-    public class Class1
+    public interface IRankingsBLL
     {
     }
 }
