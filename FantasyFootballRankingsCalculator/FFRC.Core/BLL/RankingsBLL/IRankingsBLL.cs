@@ -8,5 +8,6 @@ namespace FFRC.Core.BLL
 {
     public interface IRankingsBLL
     {
+        int GetSelectedWeek(string htmlCode);
     }
 }
