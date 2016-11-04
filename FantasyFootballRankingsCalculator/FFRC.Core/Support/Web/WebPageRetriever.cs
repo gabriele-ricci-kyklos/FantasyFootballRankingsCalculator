@@ -14,7 +14,7 @@ namespace FFRC.Core.Support.Web
             string htmlCode = null;
             using (WebClient client = new WebClient())
             {
-                htmlCode = client.DownloadString("http://yoursite.com/page.html");
+                htmlCode = client.DownloadString(pageUrl);
             }
 
             return htmlCode;

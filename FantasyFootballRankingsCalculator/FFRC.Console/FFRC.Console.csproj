@@ -40,6 +40,7 @@
       <HintPath>..\..\..\..\..\..\..\development\dotnet\GenericCore\Distribution\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -86,6 +87,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FFRC.Core.PianetaFantacalcio\FFRC.Core.PianetaFantacalcio.csproj">
+      <Project>{D4664B8B-D42C-4AB4-AA90-72FC4922AF83}</Project>
+      <Name>FFRC.Core.PianetaFantacalcio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FFRC.Core\FFRC.Core.csproj">
       <Project>{41338374-b1e6-4640-b65d-fe42fb653442}</Project>
       <Name>FFRC.Core</Name>

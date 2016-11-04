@@ -88,6 +88,7 @@
             this.btnShow.TabIndex = 5;
             this.btnShow.Text = "Show Rankings";
             this.btnShow.UseVisualStyleBackColor = true;
+            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
             // 
             // MainForm
             // 

@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\RankingsBLL\IRankingsBLL.cs" />
-    <Compile Include="BLL\RankingsBLL\RankingsBLL.cs" />
     <Compile Include="BLL\Web\IWebBLL.cs" />
     <Compile Include="BLL\Web\WebBLL.cs" />
     <Compile Include="Support\BLL\BaseBLL.cs" />
