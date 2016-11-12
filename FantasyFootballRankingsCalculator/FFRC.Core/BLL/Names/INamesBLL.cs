@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FFRC.Core.BLL
+namespace FFRC.Core.BLL.Names
 {
-    public interface IRankingsBLL
+    public interface INamesBLL
     {
-        int GetSelectedWeek(string htmlCode);
+        string RetrievePlayerName(string tablePlayerName);
     }
 }

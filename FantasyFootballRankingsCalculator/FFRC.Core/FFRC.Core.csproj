@@ -30,6 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GenericCore">
+      <HintPath>..\..\..\GenericCore\Distribution\GenericCore.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,13 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\RankingsBLL\IRankingsBLL.cs" />
+    <Compile Include="BE\Rankings\Goal.cs" />
+    <Compile Include="BE\Rankings\PlayerStats.cs" />
+    <Compile Include="BE\Rankings\PlayerStatsCollection.cs" />
+    <Compile Include="BLL\Names\INamesBLL.cs" />
+    <Compile Include="BLL\Rankings\IRankingsBLL.cs" />
     <Compile Include="BLL\Web\IWebBLL.cs" />
     <Compile Include="BLL\Web\WebBLL.cs" />
     <Compile Include="Support\BLL\BaseBLL.cs" />
     <Compile Include="Support\BLL\IBLL.cs" />
+    <Compile Include="Support\ExtensionMethods.cs" />
     <Compile Include="Support\Web\WebPageRetriever.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

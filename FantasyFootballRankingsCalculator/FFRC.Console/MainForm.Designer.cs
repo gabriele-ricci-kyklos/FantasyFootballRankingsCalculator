@@ -32,7 +32,7 @@
             this.comboWeek = new System.Windows.Forms.ComboBox();
             this.lblWeek = new System.Windows.Forms.Label();
             this.lblTeam = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.playersListBox = new System.Windows.Forms.RichTextBox();
             this.btnShow = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -72,13 +72,13 @@
             this.lblTeam.TabIndex = 3;
             this.lblTeam.Text = "Team: (each in a new line)";
             // 
-            // richTextBox1
+            // playersListBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(30, 141);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(397, 219);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
+            this.playersListBox.Location = new System.Drawing.Point(30, 141);
+            this.playersListBox.Name = "playersListBox";
+            this.playersListBox.Size = new System.Drawing.Size(397, 219);
+            this.playersListBox.TabIndex = 4;
+            this.playersListBox.Text = "";
             // 
             // btnShow
             // 
@@ -96,7 +96,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(456, 408);
             this.Controls.Add(this.btnShow);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.playersListBox);
             this.Controls.Add(this.lblTeam);
             this.Controls.Add(this.lblWeek);
             this.Controls.Add(this.comboWeek);
@@ -116,7 +116,7 @@
         private System.Windows.Forms.ComboBox comboWeek;
         private System.Windows.Forms.Label lblWeek;
         private System.Windows.Forms.Label lblTeam;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox playersListBox;
         private System.Windows.Forms.Button btnShow;
     }
 }
