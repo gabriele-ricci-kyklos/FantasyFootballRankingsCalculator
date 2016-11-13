@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FFRC.Core.BE.Rankings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace FFRC.Core.Rankings
     public interface IRankingsBLL
     {
         int GetSelectedWeek(string htmlCode);
-        IDictionary<string, double> GetPlayersRankingTable(string htmlCode);
+        IDictionary<string, Ranking> GetPlayersRankingTable(string htmlCode);
     }
 }

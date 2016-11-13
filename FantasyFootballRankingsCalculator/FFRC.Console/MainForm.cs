@@ -1,4 +1,5 @@
-﻿using FFRC.Core.BLL.Names;
+﻿using FFRC.Core.BE.Rankings;
+using FFRC.Core.BLL.Names;
 using FFRC.Core.BLL.Web;
 using FFRC.Core.PianetaFantacalcio.BLL.Names;
 using FFRC.Core.PianetaFantacalcio.BLL.Rankings;
@@ -20,7 +21,7 @@ namespace FFRC.Console
         private IRankingsBLL RankingsBLL;
         private INamesBLL NamesBLL;
         private Lazy<string> _page;
-        private Lazy<IDictionary<string, double>> _playersTable;
+        private Lazy<IDictionary<string, Ranking>> _playersTable;
 
         public MainForm()
         {
@@ -28,7 +29,7 @@ namespace FFRC.Console
             InitializeBLLs();
             
             _page = new Lazy<string>(() => WebBLL.RetrievePage(ConfigurationManager.AppSettings["RankingsUrl"]));
-            _playersTable = new Lazy<IDictionary<string, double>>(() => RankingsBLL.GetPlayersRankingTable(_page.Value));
+            _playersTable = new Lazy<IDictionary<string, Ranking>>(() => RankingsBLL.GetPlayersRankingTable(_page.Value));
 
             BindWeeks();
         }
@@ -71,10 +72,10 @@ namespace FFRC.Console
                 return;
             }
 
-            IList<IDictionary<string, double>> playersRankings = new List<IDictionary<string, double>>();
+            IList<IDictionary<string, Ranking>> playersRankings = new List<IDictionary<string, Ranking>>();
             foreach (string player in players)
             {
-                IDictionary<string, double> playersForName =
+                IDictionary<string, Ranking> playersForName =
                     _playersTable
                         .Value
                         .Where(x => NamesBLL.RetrievePlayerName(x.Key) == player)
@@ -110,7 +111,7 @@ namespace FFRC.Console
                 "TOT: {0}"
                     .FormatWith
                     (
-                        flattenedPlayersRankings.Sum(x => x.Value)
+                        flattenedPlayersRankings.Sum(x => x.Value.Value)
                     );
         }
     }

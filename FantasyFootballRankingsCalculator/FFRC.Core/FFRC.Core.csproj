@@ -50,6 +50,7 @@
     <Compile Include="BE\Rankings\Goal.cs" />
     <Compile Include="BE\Rankings\PlayerStats.cs" />
     <Compile Include="BE\Rankings\PlayerStatsCollection.cs" />
+    <Compile Include="BE\Rankings\Ranking.cs" />
     <Compile Include="BLL\Names\INamesBLL.cs" />
     <Compile Include="BLL\Rankings\IRankingsBLL.cs" />
     <Compile Include="BLL\Web\IWebBLL.cs" />

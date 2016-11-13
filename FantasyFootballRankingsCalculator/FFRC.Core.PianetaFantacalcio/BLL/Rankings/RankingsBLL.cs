@@ -1,4 +1,5 @@
-﻿using FFRC.Core.Rankings;
+﻿using FFRC.Core.BE.Rankings;
+using FFRC.Core.Rankings;
 using FFRC.Core.Support;
 using GenericCore.Support;
 using HtmlAgilityPack;
@@ -43,7 +44,7 @@ namespace FFRC.Core.PianetaFantacalcio.BLL.Rankings
             return num;
         }
 
-        public IDictionary<string, double> GetPlayersRankingTable(string htmlCode)
+        public IDictionary<string, Ranking> GetPlayersRankingTable(string htmlCode)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(htmlCode);
@@ -53,20 +54,20 @@ namespace FFRC.Core.PianetaFantacalcio.BLL.Rankings
                     .DocumentNode
                     .SelectByClass("tr", new string[] { "portiere-tabella", "difensore-tabella", "centrocampista-tabella", "attaccante-tabella" });
 
-            IDictionary<string, double> playersMap = new Dictionary<string, double>();
+            IDictionary<string, Ranking> playersMap = new Dictionary<string, Ranking>();
             foreach (HtmlNode node in playerRows)
             {
-                HtmlNode playerNode = 
+                HtmlNode nameNode = 
                     node
                         .SelectByClass("td", "text-left")
                         .FirstOrDefault();
 
-                HtmlNode rankingVG =
+                HtmlNode rankingG =
                     node
-                        .SelectByClass("td", "fantag")
+                        .SelectByClass("td", "violettog")
                         .FirstOrDefault();
 
-                if (playerNode.IsNull() || rankingVG.IsNull())
+                if (nameNode.IsNull() || rankingG.IsNull())
                 {
                     continue;
                 }
@@ -75,7 +76,7 @@ namespace FFRC.Core.PianetaFantacalcio.BLL.Rankings
                     Regex
                         .Replace
                         (
-                            playerNode
+                            nameNode
                                 .FirstChild
                                 .InnerText
                                 .Trim(),
@@ -88,23 +89,33 @@ namespace FFRC.Core.PianetaFantacalcio.BLL.Rankings
                     continue;
                 }
 
-                playersMap
-                    .Add
-                    (
-                        playerName,
-                        Math
-                            .Round
-                            (
-                                rankingVG
-                                    .InnerText
-                                    .Trim()
-                                    .ConvertTo<double>(),
-                                1
-                            )
-                    );
+                Ranking ranking = CalculateRanking(rankingG.InnerText);
+                playersMap.Add(playerName, ranking);
             }
 
             return playersMap;
+        }
+
+        private Ranking CalculateRanking(string rawRanking)
+        {
+            rawRanking.AssertNotNull("rawRanking");
+
+            string playerRanking =
+                Regex
+                    .Replace
+                    (
+                        rawRanking.Trim(),
+                        @"\t|\n|\r",
+                        ""
+                    );
+
+            if(playerRanking.Contains("s.v."))
+            {
+                return new Ranking();
+            }
+
+            playerRanking = playerRanking.Replace('.', ',');
+            return new Ranking(Math.Round(playerRanking.ConvertTo<double>(), 1));
         }
     }
 }
