@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FFRC.Core.Support.BLL
 {
-    public class BaseBLL : IBLL
+    public interface IBaseWebBLL
     {
     }
 }

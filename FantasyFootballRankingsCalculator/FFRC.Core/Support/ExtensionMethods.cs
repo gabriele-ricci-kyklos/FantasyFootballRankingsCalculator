@@ -1,4 +1,5 @@
-﻿using GenericCore.Support;
+﻿using FFRC.Core.BE.Rankings;
+using GenericCore.Support;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -42,12 +43,18 @@ namespace FFRC.Core.Support
 
             return
                 documentNodes
-                    .Descendants(descendantsName)
                     .Where
                     (x =>
-                        x.Attributes.Contains("class")
-                        && x.Attributes["class"].Value.Split(' ').IsIn(classNames)
+                        x.Name == descendantsName
+                        && x.Attributes.Contains("class")
+                        && !x.Attributes["class"].Value.Split(' ').Except(classNames).Any()
                     );
+        }
+
+        public static PlayerStatsCollection ToPlayerStatsCollection(this IEnumerable<PlayerStats> list)
+        {
+            list.AssertNotNull("list");
+            return new PlayerStatsCollection(list);
         }
     }
 }

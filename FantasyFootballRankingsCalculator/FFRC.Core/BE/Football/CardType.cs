@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FFRC.Core.BLL.Web
+namespace FFRC.Core.BE.Football
 {
-    public interface IWebBLL
+    public enum CardType
     {
-        string RetrievePage(string pageUrl);
+        YellowCard,
+        RedCard
     }
 }

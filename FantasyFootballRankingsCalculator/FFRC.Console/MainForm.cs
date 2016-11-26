@@ -1,9 +1,9 @@
 ﻿using FFRC.Core.BE.Rankings;
 using FFRC.Core.BLL.Names;
-using FFRC.Core.BLL.Web;
 using FFRC.Core.PianetaFantacalcio.BLL.Names;
 using FFRC.Core.PianetaFantacalcio.BLL.Rankings;
 using FFRC.Core.Rankings;
+using FFRC.Core.Support;
 using GenericCore.Support;
 using System;
 using System.Collections.Generic;
@@ -17,27 +17,23 @@ namespace FFRC.Console
 {
     public partial class MainForm : Form
     {
-        private IWebBLL WebBLL;
         private IRankingsBLL RankingsBLL;
         private INamesBLL NamesBLL;
-        private Lazy<string> _page;
-        private Lazy<IDictionary<string, Ranking>> _playersTable;
+        private string _url;
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeBLLs();
-            
-            _page = new Lazy<string>(() => WebBLL.RetrievePage(ConfigurationManager.AppSettings["RankingsUrl"]));
-            _playersTable = new Lazy<IDictionary<string, Ranking>>(() => RankingsBLL.GetPlayersRankingTable(_page.Value));
 
+            _url = ConfigurationManager.AppSettings["RankingsUrl"];
+
+            InitializeBLLs();
             BindWeeks();
         }
 
         private void InitializeBLLs()
         {
-            WebBLL = new WebBLL();
-            RankingsBLL = new RankingsBLL();
+            RankingsBLL = new RankingsBLL(_url);
             NamesBLL = new NamesBLL();
         }
 
@@ -47,7 +43,7 @@ namespace FFRC.Console
                 .Range(1, 38)
                 .ForEach(x => comboWeek.Items.Add(x));
 
-            int week = RankingsBLL.GetSelectedWeek(_page.Value);
+            int week = RankingsBLL.GetSelectedWeek();
             comboWeek.SelectedIndex = week == 0 ? week : week - 1;
         }
 
@@ -72,38 +68,40 @@ namespace FFRC.Console
                 return;
             }
 
-            IList<IDictionary<string, Ranking>> playersRankings = new List<IDictionary<string, Ranking>>();
-            foreach (string player in players)
-            {
-                IDictionary<string, Ranking> playersForName =
-                    _playersTable
-                        .Value
-                        .Where(x => NamesBLL.RetrievePlayerName(x.Key) == player)
-                        .ToDictionary(x => x.Key, x => x.Value);
+            PlayerStatsCollection playersRankings =
+                RankingsBLL
+                    .GetPlayersRankingsByNameList(players);
 
-                if(playersForName.Count > 0)
-                {
-                    playersRankings.Add(playersForName);
-                }
-            }
+            //IList<PlayerStatsCollection> playersRankings = new List<PlayerStatsCollection>();
+            //foreach (string player in players)
+            //{
+            //    PlayerStatsCollection playersForName =
+            //        RankingsBLL
+            //            .GetPlayersRankingsByNameList()
 
-            var duplicates = playersRankings.Where(x => x.Count > 1);
-            if(duplicates.Any())
-            {
+            //    if(playersForName.Count > 0)
+            //    {
+            //        playersRankings.Add(playersForName);
+            //    }
+            //}
 
-            }
+            //var duplicates = playersRankings.Where(x => x.Count > 1);
+            //if(duplicates.Any())
+            //{
 
-            var flattenedPlayersRankings = 
-                playersRankings
-                    .SelectMany(x => x)
-                    .ToDictionary(x => x.Key, x => x.Value);
+            //}
+
+            //var flattenedPlayersRankings =
+            //    playersRankings
+            //        .SelectMany(x => x)
+            //        .ToPlayerStatsCollection();
 
             playersListBox.Text = 
                 string
                     .Join
                     (
                         Environment.NewLine,
-                        flattenedPlayersRankings.Select(x => "{0} {1}".FormatWith(x.Key, x.Value))
+                        playersRankings.Select(x => "{0} {1}".FormatWith(x.PlayerName, x.Ranking))
                     );
 
             playersListBox.Text += Environment.NewLine + Environment.NewLine;
@@ -111,7 +109,7 @@ namespace FFRC.Console
                 "TOT: {0}"
                     .FormatWith
                     (
-                        flattenedPlayersRankings.Sum(x => x.Value.Value)
+                        playersRankings.Sum(x => x.Ranking.Value)
                     );
         }
     }

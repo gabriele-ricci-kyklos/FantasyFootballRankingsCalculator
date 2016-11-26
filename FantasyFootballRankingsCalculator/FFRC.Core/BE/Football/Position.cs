@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FFRC.Core.Support.BLL
+namespace FFRC.Core.BE.Football
 {
-    public interface IBLL
+    public enum Position
     {
+        GoalKeeper,
+        Defender,
+        Midfielder,
+        Forward
     }
 }

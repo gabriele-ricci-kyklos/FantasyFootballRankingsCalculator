@@ -1,5 +1,4 @@
 ﻿using FFRC.Core.BLL.Names;
-using FFRC.Core.BLL.Web;
 using GenericCore.Support;
 using System;
 using System.Collections.Generic;

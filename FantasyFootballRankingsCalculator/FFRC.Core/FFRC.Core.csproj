@@ -47,16 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BE\Rankings\Goal.cs" />
+    <Compile Include="BE\Football\CardType.cs" />
+    <Compile Include="BE\Football\Goal.cs" />
+    <Compile Include="BE\Football\Position.cs" />
+    <Compile Include="BE\Players\PlayerNode.cs" />
     <Compile Include="BE\Rankings\PlayerStats.cs" />
     <Compile Include="BE\Rankings\PlayerStatsCollection.cs" />
     <Compile Include="BE\Rankings\Ranking.cs" />
     <Compile Include="BLL\Names\INamesBLL.cs" />
     <Compile Include="BLL\Rankings\IRankingsBLL.cs" />
-    <Compile Include="BLL\Web\IWebBLL.cs" />
-    <Compile Include="BLL\Web\WebBLL.cs" />
-    <Compile Include="Support\BLL\BaseBLL.cs" />
-    <Compile Include="Support\BLL\IBLL.cs" />
+    <Compile Include="Support\BLL\BaseWebBLL.cs" />
+    <Compile Include="Support\BLL\IBaseWebBLL.cs" />
     <Compile Include="Support\ExtensionMethods.cs" />
     <Compile Include="Support\Web\WebPageRetriever.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
