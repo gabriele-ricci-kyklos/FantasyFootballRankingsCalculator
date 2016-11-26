@@ -1,9 +1,8 @@
 ﻿using FFRC.Core.BE.Rankings;
 using FFRC.Core.BLL.Names;
+using FFRC.Core.BLL.Rankings;
 using FFRC.Core.PianetaFantacalcio.BLL.Names;
 using FFRC.Core.PianetaFantacalcio.BLL.Rankings;
-using FFRC.Core.Rankings;
-using FFRC.Core.Support;
 using GenericCore.Support;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace FFRC.Console
 {
     public partial class MainForm : Form
     {
-        private IRankingsBLL RankingsBLL;
+        private RankingsBLL RankingsBLL;
         private INamesBLL NamesBLL;
         private string _url;
 
@@ -33,7 +32,7 @@ namespace FFRC.Console
 
         private void InitializeBLLs()
         {
-            RankingsBLL = new RankingsBLL(_url);
+            RankingsBLL = new PFRankingsBLL(_url);
             NamesBLL = new NamesBLL();
         }
 

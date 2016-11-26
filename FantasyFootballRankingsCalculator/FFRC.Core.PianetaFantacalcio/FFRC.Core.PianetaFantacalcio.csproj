@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Names\NamesBLL.cs" />
+    <Compile Include="BLL\Rankings\PFRankingsBLL.cs" />
     <Compile Include="BLL\Rankings\RankingsBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

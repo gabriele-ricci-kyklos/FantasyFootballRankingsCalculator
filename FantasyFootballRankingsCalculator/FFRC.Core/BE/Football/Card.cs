@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FFRC.Core.BE.Football
 {
-    public enum CardType
+    public enum Card
     {
         YellowCard,
         RedCard

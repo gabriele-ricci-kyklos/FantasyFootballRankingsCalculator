@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FFRC.Core.Rankings
+namespace FFRC.Core.BLL.Rankings
 {
     public interface IRankingsBLL : IBaseWebBLL
     {

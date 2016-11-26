@@ -12,7 +12,7 @@ namespace FFRC.Core.BE.Rankings
         public string PlayerName { get; set; }
         public IList<Goal> Goals { get; set; }
         public int Assists { get; set; }
-        public CardType? Card { get; set; }
+        public Card? Card { get; set; }
         public Ranking Ranking { get; set; }
     }
 }
